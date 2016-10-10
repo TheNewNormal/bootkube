@@ -21,6 +21,7 @@ check: pkg/asset/internal/templates.go
 	@go test -v $(shell go list ./... | grep -v '/vendor/')
 
 install: _output/bin/$(LOCAL_OS)/bootkube
+	mkdir -p $(GOPATH_BIN)
 	cp $< $(GOPATH_BIN)
 
 _output/bin/%/bootkube: LDFLAGS=-X github.com/coreos/bootkube/pkg/version.Version=$(shell $(CURDIR)/build/git-version.sh)
